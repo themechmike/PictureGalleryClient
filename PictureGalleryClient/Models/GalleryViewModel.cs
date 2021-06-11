@@ -8,10 +8,12 @@ namespace PictureGalleryClient.Models
     public class GalleryViewModel
     {
         public GalleryItemViewModel [] GalleryItems { get; set; }
+        public UserItemViewModel[] Users { get; set; }
 
         public GalleryViewModel()
         {
             GalleryItems = new GalleryItemViewModel[0];
+            Users = new UserItemViewModel[0];
         }
     }
 

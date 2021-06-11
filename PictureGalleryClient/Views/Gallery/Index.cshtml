@@ -25,7 +25,8 @@
                     <div class="card-columns">
                         <div class="card" style="width: 20rem;">
                             <div class="hover hover-2 text-white rounded">
-                                <img src="@galleryItem.Url" alt="">
+                                <img src="@galleryItem.Url" alt="@galleryItem.Title" />
+
                                 <a href="@galleryItem.Url">
                                     <div class="hover-overlay"></div>
                                 </a>
@@ -40,9 +41,23 @@
                             </div>
                         </div>
                     </div>
-                </div>            
+                </div>
             }
         </div>
+    </div>
+    <div class="panel-footer add-picture-form">
+        @await Html.PartialAsync("_AddPicturePartial", new GalleryItemViewModel())
+    </div>
+    <div class="panel-footer add-user-form">
+        @await Html.PartialAsync("_AddUserPartial", new UserItemViewModel())
+    </div>
+
+    <div class="container">
+
+    </div>
+
+    <div class="container">
+
     </div>
 
     <div>
@@ -60,5 +75,6 @@
             </ul>
         </nav>
     </div>
+
 </body>
 </html>

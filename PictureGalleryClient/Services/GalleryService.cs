@@ -13,16 +13,21 @@ namespace PictureGalleryClient.Services
 
         HttpClient httpClient = new HttpClient();
 
-        /*
-        public async Task<Guid> AddPictureAsync (GalleryItemViewModel GalleryItem)
+        
+        public async Task<Guid> AddPictureAsync (GalleryItemViewModel galleryItem)
         {
             GalleryWebApiClient apiClient = new GalleryWebApiClient(url, httpClient);
-            GalleryItem.OwnerId = "owner_id";
-            GalleryItem.Title = "Title_01";
-            Guid returnedValue = await apiClient.PictureAsync(GalleryItem.ToDto());
+            Guid returnedValue = await apiClient.PictureAsync("user1@dupa.com", galleryItem.ToDto());
             return returnedValue;           
         }
-        */
+
+        public async Task<Guid> AddUserAsync(UserItemViewModel user)
+        {
+            GalleryWebApiClient apiClient = new GalleryWebApiClient(url, httpClient);
+            var returnedValue = await apiClient.UserAsync(user.ToDto());
+            return returnedValue;
+        }
+
         public async Task<GalleryItemViewModel[]> GetGalleryItemsAsync()
         {
             GalleryWebApiClient apiClient = new GalleryWebApiClient(url, httpClient);

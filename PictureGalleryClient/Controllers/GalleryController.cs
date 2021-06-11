@@ -3,6 +3,7 @@ using PictureGalleryClient.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using System;
 
 namespace PictureGalleryClient.Controllers
 {
@@ -23,6 +24,20 @@ namespace PictureGalleryClient.Controllers
             };
 
             return View(galleryModel);
+        }
+
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddUser(UserItemViewModel user)
+        {
+            Guid guid = await _galleryService.AddUserAsync(user);
+            return RedirectToAction("Index");
+        }
+
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddPicture(GalleryItemViewModel picture)
+        {
+            Guid guid = await _galleryService.AddPictureAsync(picture);
+            return RedirectToAction("Index");
         }
     }
 } 

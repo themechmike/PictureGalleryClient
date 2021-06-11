@@ -17,18 +17,25 @@ namespace PictureGalleryClient.Models
         public string Url { get; set; }
         public Guid OwnerId { get; set; }
 
-        internal string ToDto()
+        internal PictureDTO ToDto()
         {
-            throw new NotImplementedException();
+            PictureDTO returnValue = new PictureDTO();
+
+            returnValue.OwnerId = OwnerId;
+            returnValue.Title = Title;
+            returnValue.Url = Url;
+
+            return returnValue;
         }
 
         internal static GalleryItemViewModel FromDto(Picture dto)
         {
             GalleryItemViewModel returnedValue = new GalleryItemViewModel();
 
-            returnedValue.Title = dto.Title;
+            returnedValue.Id = dto.Id;
             returnedValue.DateAdded = dto.DateAdded;
             returnedValue.OwnerId = dto.OwnerId;
+            returnedValue.Title = dto.Title;
             returnedValue.Url = dto.Url;
 
             return returnedValue;
