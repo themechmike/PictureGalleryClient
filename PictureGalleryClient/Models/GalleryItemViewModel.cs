@@ -24,6 +24,7 @@ namespace PictureGalleryClient.Models
             returnValue.OwnerId = OwnerId;
             returnValue.Title = Title;
             returnValue.Url = Url;
+            
 
             return returnValue;
         }
