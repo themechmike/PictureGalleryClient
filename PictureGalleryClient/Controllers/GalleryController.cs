@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System;
 using Microsoft.AspNetCore.Identity;
 using AuthDatabase.Entities;
+using System.Linq;
 
 namespace PictureGalleryClient.Controllers
 {
@@ -28,6 +29,16 @@ namespace PictureGalleryClient.Controllers
                 return Challenge();
             }
 
+            var allUsersOnServer = await _galleryService.CheckUser();
+            var user = allUsersOnServer.Where(e => e.UserEmail == currentUser.Email).FirstOrDefault();
+            if (user == null)
+            {
+                UserItemViewModel newUser = new UserItemViewModel();
+                newUser.UserEmail = currentUser.Email;
+
+                var userAdded = await _galleryService.AddUserAsync(newUser.ToDto());
+            }
+
             var galleryItems = await _galleryService.GetGalleryItemsAsync(currentUser.Email);
             
             var galleryModel = new GalleryViewModel()
@@ -39,7 +50,7 @@ namespace PictureGalleryClient.Controllers
         }
 
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddUser(UserItemViewModel user)
+        public async Task<IActionResult> AddUser(UserDTO user)
         {
             Guid guid = await _galleryService.AddUserAsync(user);
             return RedirectToAction("Index");

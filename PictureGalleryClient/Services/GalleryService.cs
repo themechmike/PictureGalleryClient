@@ -13,7 +13,15 @@ namespace PictureGalleryClient.Services
 
         HttpClient httpClient = new HttpClient();
 
-        
+        public async Task<UserItemViewModel[]> CheckUser()
+        {
+            GalleryWebApiClient apiClient = new GalleryWebApiClient(url, httpClient);
+
+            var userList = await apiClient.UserAllAsync();
+
+            return userList.Select(dto => UserItemViewModel.FromDto(dto)).ToArray();
+        }
+
         public async Task<Guid> AddPictureAsync (GalleryItemViewModel galleryItem, string ownerId)
         {
             GalleryWebApiClient apiClient = new GalleryWebApiClient(url, httpClient);
@@ -23,11 +31,11 @@ namespace PictureGalleryClient.Services
             return returnedValue;           
         }
 
-        public async Task<Guid> AddUserAsync(UserItemViewModel user)
+        public async Task<Guid> AddUserAsync(UserDTO user)
         {
             GalleryWebApiClient apiClient = new GalleryWebApiClient(url, httpClient);
             
-            var returnedValue = await apiClient.UserAsync(user.ToDto());
+            var returnedValue = await apiClient.UserAsync(user);
             
             return returnedValue;
         }
