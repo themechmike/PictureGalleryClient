@@ -50,13 +50,6 @@ namespace PictureGalleryClient.Controllers
         }
 
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddUser(UserDTO user)
-        {
-            Guid guid = await _galleryService.AddUserAsync(user);
-            return RedirectToAction("Index");
-        }
-
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddPicture(GalleryItemViewModel picture)
         {
             var currentUser = await _userManager.GetUserAsync(User);
