@@ -69,7 +69,7 @@ namespace PictureGalleryClient
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Gallery}/{action=Index}" +
+                    pattern: "{controller=Home}/{action=Index}" +
                     "");
             });
         }
