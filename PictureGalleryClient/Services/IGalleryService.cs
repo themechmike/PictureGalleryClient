@@ -7,7 +7,8 @@ namespace PictureGalleryClient.Services
     public interface IGalleryService
     {
         Task<GalleryItemViewModel[]> GetGalleryItemsAsync(string ownerId);
-        Task<Guid> AddUserAsync(UserItemViewModel user);
+        Task<UserItemViewModel[]> CheckUser();
+        Task<Guid> AddUserAsync(UserDTO user);
         Task<Guid> AddPictureAsync(GalleryItemViewModel galleryItem, string ownerId);
     }
 }

@@ -31,15 +31,15 @@ namespace PictureGalleryClient.Models
             return returnValue;
         }
 
-        internal static GalleryItemViewModel FromDto(Picture dto)
+        internal static GalleryItemViewModel FromDto(Picture picture)
         {
             GalleryItemViewModel returnedValue = new GalleryItemViewModel();
 
-            returnedValue.Id = dto.Id;
-            returnedValue.DateAdded = dto.DateAdded;
-            returnedValue.OwnerId = dto.OwnerId;
-            returnedValue.Title = dto.Title;
-            returnedValue.Url = dto.Url;
+            returnedValue.Id = picture.Id;
+            returnedValue.DateAdded = picture.DateAdded;
+            returnedValue.OwnerId = picture.OwnerId;
+            returnedValue.Title = picture.Title;
+            returnedValue.Url = picture.Url;
 
             return returnedValue;
         }
