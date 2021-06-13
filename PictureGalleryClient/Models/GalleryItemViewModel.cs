@@ -1,4 +1,5 @@
-﻿using PictureGalleryClient.Services;
+﻿using Microsoft.AspNetCore.Http;
+using PictureGalleryClient.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -16,6 +17,7 @@ namespace PictureGalleryClient.Models
         public string Title { get; set; }
         public string Url { get; set; }
         public Guid OwnerId { get; set; }
+        public IFormFile File { get; set; }
 
         internal PictureDTO ToDto()
         {
@@ -24,7 +26,7 @@ namespace PictureGalleryClient.Models
             returnValue.OwnerId = OwnerId;
             returnValue.Title = Title;
             returnValue.Url = Url;
-            
+            // returnValue.File = File;
 
             return returnValue;
         }

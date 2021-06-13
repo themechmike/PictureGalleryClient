@@ -24,6 +24,30 @@ namespace PictureGalleryClient.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
+                if (result.Succeeded)
+                {
+                    return RedirectToLocal(returnUrl);
+                }
+                
+                ModelState.AddModelError(string.Empty, "Invalid login or password");
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction(nameof(HomeController.Index), "Home");
+        }
+
         [HttpGet]
         public async Task<IActionResult> Register(string returnUrl = null)
         {
@@ -60,7 +84,7 @@ namespace PictureGalleryClient.Controllers
             }
             else
             {
-                return RedirectToAction(nameof(HomeController.Index), "Home");
+                return RedirectToAction(nameof(GalleryController.Index), "Gallery");
             }
         }
     }
