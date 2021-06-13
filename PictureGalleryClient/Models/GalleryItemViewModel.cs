@@ -1,4 +1,5 @@
-﻿using PictureGalleryClient.Services;
+﻿using Microsoft.AspNetCore.Http;
+using PictureGalleryClient.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -16,20 +17,29 @@ namespace PictureGalleryClient.Models
         public string Title { get; set; }
         public string Url { get; set; }
         public Guid OwnerId { get; set; }
+        public IFormFile File { get; set; }
 
-        internal string ToDto()
+        internal PictureDTO ToDto()
         {
-            throw new NotImplementedException();
+            PictureDTO returnValue = new PictureDTO();
+
+            returnValue.OwnerId = OwnerId;
+            returnValue.Title = Title;
+            returnValue.Url = Url;
+            // returnValue.File = File;
+
+            return returnValue;
         }
 
-        internal static GalleryItemViewModel FromDto(Picture dto)
+        internal static GalleryItemViewModel FromDto(Picture picture)
         {
             GalleryItemViewModel returnedValue = new GalleryItemViewModel();
 
-            returnedValue.Title = dto.Title;
-            returnedValue.DateAdded = dto.DateAdded;
-            returnedValue.OwnerId = dto.OwnerId;
-            returnedValue.Url = dto.Url;
+            returnedValue.Id = picture.Id;
+            returnedValue.DateAdded = picture.DateAdded;
+            returnedValue.OwnerId = picture.OwnerId;
+            returnedValue.Title = picture.Title;
+            returnedValue.Url = picture.Url;
 
             return returnedValue;
         }

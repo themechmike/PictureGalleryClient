@@ -13,20 +13,39 @@ namespace PictureGalleryClient.Services
 
         HttpClient httpClient = new HttpClient();
 
-        /*
-        public async Task<Guid> AddPictureAsync (GalleryItemViewModel GalleryItem)
+        public async Task<UserItemViewModel[]> CheckUser()
         {
             GalleryWebApiClient apiClient = new GalleryWebApiClient(url, httpClient);
-            GalleryItem.OwnerId = "owner_id";
-            GalleryItem.Title = "Title_01";
-            Guid returnedValue = await apiClient.PictureAsync(GalleryItem.ToDto());
+
+            var userList = await apiClient.UserAllAsync();
+
+            return userList.Select(dto => UserItemViewModel.FromDto(dto)).ToArray();
+        }
+
+        public async Task<Guid> AddPictureAsync (GalleryItemViewModel galleryItem, string ownerId)
+        {
+            GalleryWebApiClient apiClient = new GalleryWebApiClient(url, httpClient);
+            
+            Guid returnedValue = await apiClient.PictureAsync(ownerId, galleryItem.ToDto());
+            
             return returnedValue;           
         }
-        */
-        public async Task<GalleryItemViewModel[]> GetGalleryItemsAsync()
+
+        public async Task<Guid> AddUserAsync(UserDTO user)
         {
             GalleryWebApiClient apiClient = new GalleryWebApiClient(url, httpClient);
-            var dtoGalleryItems = await apiClient.PictureAllAsync("user1@dupa.com");
+            
+            var returnedValue = await apiClient.UserAsync(user);
+            
+            return returnedValue;
+        }
+
+        public async Task<GalleryItemViewModel[]> GetGalleryItemsAsync(string ownerId)
+        {
+            GalleryWebApiClient apiClient = new GalleryWebApiClient(url, httpClient);
+            
+            var dtoGalleryItems = await apiClient.PictureAllAsync(ownerId);
+            
             return dtoGalleryItems.Select(dto => GalleryItemViewModel.FromDto(dto)).ToArray();
         }
     }
