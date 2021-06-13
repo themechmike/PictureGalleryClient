@@ -1,8 +1,13 @@
-﻿using PictureGalleryClient.Models;
+﻿using Newtonsoft.Json;
+using PictureGalleryClient.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace PictureGalleryClient.Services
@@ -13,6 +18,17 @@ namespace PictureGalleryClient.Services
 
         HttpClient httpClient = new HttpClient();
 
+        public async Task AddPictureAsync(GalleryItemViewModel content, string ownerId)
+        {
+            var formContent = new MultipartFormDataContent();
+
+            var FilePath = @"f:\Downloads\orig_art-fo4-power-armor-3d46d.jpg";
+
+            formContent.Add(new StreamContent(File.OpenRead(FilePath)), "files", Path.GetFileName(FilePath));
+            httpClient.BaseAddress = new Uri(url);
+            var response = await httpClient.PostAsync("api/Picture/" + ownerId, formContent);
+        }
+
         public async Task<UserItemViewModel[]> CheckUser()
         {
             GalleryWebApiClient apiClient = new GalleryWebApiClient(url, httpClient);
@@ -22,6 +38,7 @@ namespace PictureGalleryClient.Services
             return userList.Select(dto => UserItemViewModel.FromDto(dto)).ToArray();
         }
 
+        /*
         public async Task<Guid> AddPictureAsync (GalleryItemViewModel galleryItem, string ownerId)
         {
             GalleryWebApiClient apiClient = new GalleryWebApiClient(url, httpClient);
@@ -30,6 +47,7 @@ namespace PictureGalleryClient.Services
             
             return returnedValue;           
         }
+        */
 
         public async Task<Guid> AddUserAsync(UserDTO user)
         {

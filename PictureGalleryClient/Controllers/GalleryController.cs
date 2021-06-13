@@ -58,7 +58,7 @@ namespace PictureGalleryClient.Controllers
             {
                 return Challenge();
             }
-            Guid guid = await _galleryService.AddPictureAsync(picture, currentUser.Email);
+            await _galleryService.AddPictureAsync(picture, currentUser.Email);
 
             return RedirectToAction("Index");
         }

@@ -1,5 +1,6 @@
 ﻿using PictureGalleryClient.Models;
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace PictureGalleryClient.Services
@@ -9,6 +10,6 @@ namespace PictureGalleryClient.Services
         Task<GalleryItemViewModel[]> GetGalleryItemsAsync(string ownerId);
         Task<UserItemViewModel[]> CheckUser();
         Task<Guid> AddUserAsync(UserDTO user);
-        Task<Guid> AddPictureAsync(GalleryItemViewModel galleryItem, string ownerId);
+        Task AddPictureAsync(GalleryItemViewModel galleryItem, string ownerId);
     }
 }
