@@ -19,6 +19,7 @@ namespace PictureGalleryClient.Models
         public Guid OwnerId { get; set; }
         public IFormFile File { get; set; }
 
+        /*
         internal PictureDTO ToDto()
         {
             PictureDTO returnValue = new PictureDTO();
@@ -30,6 +31,7 @@ namespace PictureGalleryClient.Models
 
             return returnValue;
         }
+        */
 
         internal static GalleryItemViewModel FromDto(Picture picture)
         {
