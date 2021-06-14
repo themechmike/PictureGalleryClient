@@ -33,8 +33,4 @@
     <ProjectReference Include="..\AuthDatabase\AuthDatabase.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\Gallery\Pictures\" />
-  </ItemGroup>
-
 </Project>
