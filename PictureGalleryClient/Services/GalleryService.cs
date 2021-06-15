@@ -20,18 +20,14 @@ namespace PictureGalleryClient.Services
 
         public async Task AddPictureAsync(GalleryItemViewModel content, string ownerId)
         {
-            var formContent = new MultipartFormDataContent();
+            GalleryApiClient apiClient = new GalleryApiClient(url, httpClient);
 
-            var FilePath = @"f:\Downloads\orig_art-fo4-power-armor-3d46d.jpg";
-
-            formContent.Add(new StreamContent(File.OpenRead(FilePath)), "files", Path.GetFileName(FilePath));
-            httpClient.BaseAddress = new Uri(url);
-            var response = await httpClient.PostAsync("api/Picture/" + ownerId, formContent);
+            await apiClient.PictureAsync(ownerId, content.Title, content.Title, content.Title, content.File);
         }
 
         public async Task<UserItemViewModel[]> CheckUser()
         {
-            GalleryWebApiClient apiClient = new GalleryWebApiClient(url, httpClient);
+            GalleryApiClient apiClient = new GalleryApiClient(url, httpClient);
 
             var userList = await apiClient.UserAllAsync();
 
@@ -41,7 +37,7 @@ namespace PictureGalleryClient.Services
         /*
         public async Task<Guid> AddPictureAsync (GalleryItemViewModel galleryItem, string ownerId)
         {
-            GalleryWebApiClient apiClient = new GalleryWebApiClient(url, httpClient);
+            Client apiClient = new Client(url, httpClient);
             
             Guid returnedValue = await apiClient.PictureAsync(ownerId, galleryItem.ToDto());
             
@@ -51,7 +47,7 @@ namespace PictureGalleryClient.Services
 
         public async Task<Guid> AddUserAsync(UserDTO user)
         {
-            GalleryWebApiClient apiClient = new GalleryWebApiClient(url, httpClient);
+            GalleryApiClient apiClient = new GalleryApiClient(url, httpClient);
             
             var returnedValue = await apiClient.UserAsync(user);
             
@@ -60,11 +56,19 @@ namespace PictureGalleryClient.Services
 
         public async Task<GalleryItemViewModel[]> GetGalleryItemsAsync(string ownerId)
         {
-            GalleryWebApiClient apiClient = new GalleryWebApiClient(url, httpClient);
+            GalleryApiClient apiClient = new GalleryApiClient(url, httpClient);
             
             var dtoGalleryItems = await apiClient.PictureAllAsync(ownerId);
             
             return dtoGalleryItems.Select(dto => GalleryItemViewModel.FromDto(dto)).ToArray();
         }
+
+        public async Task<string> DeletePictureAsync(string ownerId, Guid pictureId)
+        {
+            GalleryApiClient apiClient = new GalleryApiClient(url, httpClient);            
+
+            return null; 
+        }
+
     }
 }

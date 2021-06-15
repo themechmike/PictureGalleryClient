@@ -62,5 +62,19 @@ namespace PictureGalleryClient.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeletePicture(Guid pictureId)
+        {
+            var currentUser = await _userManager.GetUserAsync(User);
+
+            if (currentUser == null)
+            {
+                return Challenge();
+            }
+            await _galleryService.DeletePictureAsync(currentUser.Email, pictureId);
+
+            return RedirectToAction("Index");
+        }
     }
 } 

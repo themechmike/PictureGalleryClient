@@ -11,5 +11,6 @@ namespace PictureGalleryClient.Services
         Task<UserItemViewModel[]> CheckUser();
         Task<Guid> AddUserAsync(UserDTO user);
         Task AddPictureAsync(GalleryItemViewModel galleryItem, string ownerId);
+        Task<string> DeletePictureAsync(string ownerId, Guid pictureId);
     }
 }
