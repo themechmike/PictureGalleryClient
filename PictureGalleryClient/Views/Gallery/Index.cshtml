@@ -40,8 +40,11 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <p class="card-text">@galleryItem.OwnerId</p>
-                                <a href="#" class="btn btn-primary">Do something</a>
+                                <p class="card-text">@galleryItem.Id</p>
+                                @using (Html.BeginForm("DeletePicture", "Gallery", new { pictureId = @galleryItem.Id }))
+                                {
+                                    <button class="btn btn-primary btn-sm" type="submit">Delete</button>
+                                }
                             </div>
                         </div>
                     </div>
