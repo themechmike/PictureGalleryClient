@@ -63,9 +63,10 @@ namespace PictureGalleryClient.Services
             return dtoGalleryItems.Select(dto => GalleryItemViewModel.FromDto(dto)).ToArray();
         }
 
-        public async Task<string> DeletePictureAsync(string ownerId, Guid pictureId)
+        public async Task<string> DeletePictureAsync(Guid pictureId, string ownerId)
         {
-            GalleryApiClient apiClient = new GalleryApiClient(url, httpClient);            
+            GalleryApiClient apiClient = new GalleryApiClient(url, httpClient);
+            await apiClient.Picture2Async(pictureId.ToString(), ownerId);
 
             return null; 
         }
