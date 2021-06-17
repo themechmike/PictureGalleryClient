@@ -12,7 +12,7 @@
 <html>
 <head>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="/css/GalleryStyleSheet.css" />
+    <link rel="stylesheet" href="/css/GalleryStyleSheet.css" />
 </head>
 <body>
     <div class="container-fluid">
@@ -22,13 +22,12 @@
         </div>
     </div>
 
-
     <div class="container-fluid">
-        <div class="row">
-            <div class="card-columns">
-                    @foreach (var galleryItem in Model.GalleryItems)
-                    {
-                        <div class="card">
+        <div class="row justify-content-center">
+                @foreach (var galleryItem in Model.GalleryItems)
+                {
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="card" style="width: auto;">
                             <div class="hover hover-2 text-white rounded">
                                 <img class="card-img-top img-fluid" src="@galleryItem.Url" alt="@galleryItem.Title" />
                                 <a href="@galleryItem.Url">
@@ -46,8 +45,9 @@
                                 }
                             </div>
                         </div>
-                    }
-            </div>
+                    </div>
+
+                }
         </div>
     </div>
 

@@ -1,14 +1,18 @@
 ﻿body {
     background-color: white;
 }
+
 .card {
     background-color: darkgrey;
+}
+
+.row {
+    grid-row-gap: 10px;
 }
 
 .card-title {
     color: rebeccapurple;
 }
-
 
 .hover {
     overflow: hidden;
