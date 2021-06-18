@@ -17,6 +17,8 @@ namespace PictureGalleryClient.Models
         public string Title { get; set; }
         public string Url { get; set; }
         public Guid OwnerId { get; set; }
+        public string Tags { get; set; }
+        public string Description { get; set; }
         public IFormFile File { get; set; }
 
         /*
@@ -42,6 +44,8 @@ namespace PictureGalleryClient.Models
             returnedValue.OwnerId = picture.OwnerId;
             returnedValue.Title = picture.Title;
             returnedValue.Url = picture.Url;
+            returnedValue.Tags = picture.Tags;
+            returnedValue.Description= picture.Description;
 
             return returnedValue;
         }
