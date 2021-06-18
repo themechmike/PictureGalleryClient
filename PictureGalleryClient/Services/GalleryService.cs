@@ -34,17 +34,6 @@ namespace PictureGalleryClient.Services
             return userList.Select(dto => UserItemViewModel.FromDto(dto)).ToArray();
         }
 
-        /*
-        public async Task<Guid> AddPictureAsync (GalleryItemViewModel galleryItem, string ownerId)
-        {
-            Client apiClient = new Client(url, httpClient);
-            
-            Guid returnedValue = await apiClient.PictureAsync(ownerId, galleryItem.ToDto());
-            
-            return returnedValue;           
-        }
-        */
-
         public async Task<Guid> AddUserAsync(UserDTO user)
         {
             GalleryApiClient apiClient = new GalleryApiClient(url, httpClient);
