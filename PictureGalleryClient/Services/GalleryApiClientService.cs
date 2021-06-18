@@ -14,6 +14,7 @@
 namespace PictureGalleryClient.Services
 {
     using Microsoft.AspNetCore.Http;
+    using System;
     using System = global::System;
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.11.3.0 (NJsonSchema v10.4.4.0 (Newtonsoft.Json v11.0.0.0))")]
@@ -253,7 +254,7 @@ namespace PictureGalleryClient.Services
             urlBuilder_.Replace("{userEmail}", System.Uri.EscapeDataString(ConvertToString(userEmail, System.Globalization.CultureInfo.InvariantCulture)));
             if (fileName != null)
             {
-                urlBuilder_.Append(System.Uri.EscapeDataString("fileName") + "=").Append(System.Uri.EscapeDataString(ConvertToString(fileName, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append(System.Uri.EscapeDataString("pictureId") + "=").Append(System.Uri.EscapeDataString(ConvertToString(fileName, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             urlBuilder_.Length--;
 
