@@ -1,11 +1,16 @@
 ﻿body {
     background-color: white;
 }
+
 .card {
     background-color: darkgrey;
 }
 
-.card-title{
+.row {
+    grid-row-gap: 10px;
+}
+
+.card-title {
     color: rebeccapurple;
 }
 

@@ -1,13 +1,16 @@
-﻿@model  GalleryItemViewModel
-
-<form asp-action="AddPicture" method="post" enctype="multipart/form-data">
-    <div>
-        <label asp-for="Title">Picture title</label>
-        <input asp-for="Title" />
+﻿@model GalleryItemViewModel
+<br />
+    <div class="row align-items-center justify-content-center">
+        <h1 class="display-4">Add a new picture:</h1>
+        <form asp-action="AddPicture" method="post" enctype="multipart/form-data">
+            <div>
+                <label asp-for="Title">Picture title</label>
+                <input asp-for="Title" />
+            </div>
+            <div>
+                <label for="image">Image File</label>
+                <input asp-for="File" name="file" type="file" />
+            </div>
+            <button type="submit">Add new picture</button>
+        </form>
     </div>
-    <div>
-        <label for="image">Image File</label>
-        <input asp-for="File" name="file" type="file" />
-    </div>
-    <button type="submit">Add new picture</button>
-</form>

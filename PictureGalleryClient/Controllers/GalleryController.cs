@@ -72,7 +72,7 @@ namespace PictureGalleryClient.Controllers
             {
                 return Challenge();
             }
-            await _galleryService.DeletePictureAsync(currentUser.Email, pictureId);
+            await _galleryService.DeletePictureAsync(pictureId, currentUser.Email);
 
             return RedirectToAction("Index");
         }
