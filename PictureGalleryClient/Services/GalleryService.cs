@@ -22,7 +22,7 @@ namespace PictureGalleryClient.Services
         {
             GalleryApiClient apiClient = new GalleryApiClient(url, httpClient);
 
-            await apiClient.PictureAsync(ownerId, content.Title, content.Title, content.Title, content.File);
+            await apiClient.PictureAsync(ownerId, content.Title, content.Description, content.Tags, content.File);
         }
 
         public async Task<UserItemViewModel[]> CheckUser()
