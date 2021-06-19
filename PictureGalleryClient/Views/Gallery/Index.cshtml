@@ -38,7 +38,9 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <p class="card-text">@galleryItem.Title</p>
+                                <p class="card-text">Title: @galleryItem.Title</p>
+                                <p class="card-text">Description: @galleryItem.Description</p>
+                                <p class="card-text">Tags: @galleryItem.Tags</p>
                                 @using (Html.BeginForm("DeletePicture", "Gallery", new { pictureId = @galleryItem.Id }))
                                 {
                                     <button class="btn btn-primary btn-sm" type="submit">Delete</button>
