@@ -13,8 +13,10 @@
 <head>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="/css/GalleryStyleSheet.css" />
+    <script src="/Scripts/jquery-3.1.1.min.js"></script>
 </head>
 <body>
+
     <div class="container-fluid">
         <div class="text-center">
             <h1>Image Gallery</h1>
@@ -23,38 +25,65 @@
     </div>
 
     <div class="container-fluid">
-        <div class="row justify-content-center">
-                @foreach (var galleryItem in Model.GalleryItems)
-                {
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                        <div class="card" style="width: auto;">
-                            <div class="hover hover-2 text-white rounded">
-                                <img class="card-img-top img-fluid" src="@galleryItem.Url" alt="@galleryItem.Title" />
-                                <a href="@galleryItem.Url">
-                                    <div class="hover-overlay"></div>
-                                </a>
-                                <div class="hover-2-content px-5 py-0">
-                                    <p class="hover-2-description text-uppercase mb-0">@galleryItem.DateAdded</p>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <p class="card-text">Title: @galleryItem.Title</p>
-                                <p class="card-text">Description: @galleryItem.Description</p>
-                                <p class="card-text">Tags: @galleryItem.Tags</p>
-                                @using (Html.BeginForm("DeletePicture", "Gallery", new { pictureId = @galleryItem.Id }))
-                                {
-                                    <button class="btn btn-primary btn-sm" type="submit">Delete</button>
-                                }
+        <div class="row justify-content-center" id="gallery">
+            @foreach (var galleryItem in Model.GalleryItems)
+            {
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="card" style="width: auto;">
+                        <div class="hover hover-2 text-white rounded">
+                            <a data-toggle="modal" href="#modalPic">
+                                <img class="getSrc" src="@galleryItem.Url" data-id="@galleryItem.Url" onclick="AlertName">
+                            </a>
+                            <div class="hover-2-content px-5 py-0">
+                                <p class="hover-2-description text-uppercase mb-0">@galleryItem.DateAdded</p>
                             </div>
                         </div>
+                        <div class="card-body">
+                            <p class="card-text">Title: @galleryItem.Title</p>
+                            <p class="card-text">Description: @galleryItem.Description</p>
+                            <p class="card-text">Tags: @galleryItem.Tags</p>
+                            @using (Html.BeginForm("DeletePicture", "Gallery", new { pictureId = @galleryItem.Id }))
+                            {
+                                <button class="btn btn-primary btn-sm" type="submit">Delete</button>
+                            }
+                        </div>
                     </div>
-
-                }
+                </div>
+            }
         </div>
     </div>
 
     <div class="panel-footer add-picture-form">
         @await Html.PartialAsync("_AddPicturePartial", new GalleryItemViewModel())
     </div>
-</body>
+
+    <!-- Modal markup: https://getbootstrap.com/docs/4.4/components/modal/ -->
+    <div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" id="modalPic">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img class="img-fluid" style="width:100%; height:auto;" id="myImage" src="" />
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @section scripts {
+        <script type="text/javascript">
+            $(document).on("click", ".getSrc", function () {
+                var myImageId = $(this).data('id');
+                $(".modal-body #myImage").attr("src", myImageId);
+            });
+        </script>
+        }
+
+    </body>
 </html>

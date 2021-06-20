@@ -10,10 +10,6 @@
     grid-row-gap: 10px;
 }
 
-.card-title {
-    color: rebeccapurple;
-}
-
 .hover {
     overflow: hidden;
     position: relative;
@@ -80,3 +76,4 @@
 .hover-2:hover .hover-overlay {
     background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.1));
 }
+
